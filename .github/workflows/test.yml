@@ -1,26 +1,48 @@
-name: CI
+name: Run tests
 
-on: [push, pull_request]
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      ALLURE_JOB_RUN_ID:
+        description: ALLURE_JOB_RUN_ID service parameter. Leave blank.
+      ALLURE_USERNAME:
+        description: ALLURE_USERNAME service parameter. Leave blank.
+
+env:
+  ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
+  ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
+  ALLURE_ENDPOINT: https://hardy.testops.cloud/
+  ALLURE_PROJECT_ID: 1
+  ALLURE_RESULTS: allure-results
 
 jobs:
-  job1:
+  all-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
       - name: Install dependencies
         run: npm install
 
-      - name: Run project
-        run: npm run test:e2e
+      - name: Run Angular e2e tests
+        run: npm run test:e2e -- --reporter allure
 
       - name: Generate Allure Report
-        run: npx allure generate allure-results --clean -o allure-report
+        run: npx allure generate ${{ env.ALLURE_RESULTS }} --clean -o allure-report
+
+      - name: Install allurectl
+        uses: allure-framework/setup-allurectl@v1
 
       - name: Upload report to Allure TestOps
         env:
           ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
-          ALLURE_ENDPOINT: "https://hardy.testops.cloud/"
-          ALLURE_PROJECT_ID: "#1"
-        run: allurectl upload --results allure-results
+          ALLURE_ENDPOINT: ${{ env.ALLURE_ENDPOINT }}
+          ALLURE_PROJECT_ID: ${{ env.ALLURE_PROJECT_ID }}
+        run: allurectl upload --results allure-report
