@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:testcafe": "node dist/testcafe/server/server.mjs",
-    "test:e2e": "testcafe \"chrome:headless\" e2e/tests/**/*.ts --speed 0.2"
+    "test:e2e": "testcafe firefox e2e/tests/**/*.ts --speed 0.2"
   },
   "private": true,
   "dependencies": {
