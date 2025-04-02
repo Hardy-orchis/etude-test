@@ -50,11 +50,8 @@ jobs:
       - name: Generate Allure Report
         run: allure generate allure-repos --clean -o allure-repos
 
-      - name: Install allurectl manually
-        run: |
-          wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O allurectl
-          chmod +x allurectl
-          sudo mv allurectl /usr/local/bin/
+      - name: Install allurectl
+        uses: allure-framework/setup-allurectl@v1
 
       - name: Verification allurectl
         run: allurectl --version
