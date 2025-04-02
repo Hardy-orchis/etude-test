@@ -40,7 +40,7 @@ jobs:
       - name: Run Angular e2e tests
         run: npm run test:e2e
 
-      -name: install Allure
+      - name: install Allure
         run: npm install -g allure-commandline@2.20.1
 
       - name: Generate Allure Report
