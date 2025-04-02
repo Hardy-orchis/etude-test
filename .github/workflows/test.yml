@@ -14,11 +14,20 @@ jobs:
 
       - name: Run project
         run: npm start
+      - name: Wait for the app to start
+        run: |
+          timeout=0
+          while ! curl --silent --head http://localhost:4200; do
+            if [ $timeout -gt 30 ]; then
+              echo "App failed to start after 30 seconds."
+              exit 1
+            fi
+            echo "Waiting for app to start..."
+            sleep 5
+            timeout=$((timeout + 5))
+          done
+          echo "App is up and running!"
 
-  job2:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
       - name: Run tests
         run: npm run test:e2e
 
