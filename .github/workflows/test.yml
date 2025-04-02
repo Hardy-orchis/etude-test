@@ -13,7 +13,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      -name: Run project
+      - name: Run project
        run: npm start
 
       - name: Run tests
