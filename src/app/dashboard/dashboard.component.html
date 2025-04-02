@@ -1,0 +1,32 @@
+<h1>Tableau de bord</h1>
+<form>
+  <input [(ngModel)]="personName" name="personName" placeholder="Entrez un nom">
+  <button (click)="search()">Rechercher</button>
+</form>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>First Name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (person of dataDisplay; track person.name) {
+      <tr>
+        <td>{{ person.name }}</td>
+        <td>{{ person.firstName }}</td>
+        <td>{{ person.age }}</td>
+      </tr>
+    }
+    @empty {
+      <tr>
+        <td colspan="3">No data available.</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<button (click)="logOut()" >
+  log out
+</button>
