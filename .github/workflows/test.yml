@@ -21,6 +21,8 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      security-events: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -42,7 +44,7 @@ jobs:
       - name: Run Angular e2e tests
         run: npm run test:e2e
 
-      - name: install Allure
+      - name: Install Allure
         run: npm install -g allure-commandline@2.20.1
 
       - name: Generate Allure Report
@@ -59,4 +61,4 @@ jobs:
           ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
           ALLURE_ENDPOINT: ${{ env.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ env.ALLURE_PROJECT_ID }}
-        run: allurectl upload --results allure-report
+        run: allurectl upload --results allure-repos
