@@ -32,7 +32,7 @@ jobs:
         run: npm install
 
       - name: Run Angular e2e tests
-        run: npm run test:e2e -- --reporter allure
+        run: npm run test:e2e
 
       - name: Generate Allure Report
         run: npx allure generate ${{ env.ALLURE_RESULTS }} --clean -o allure-report
