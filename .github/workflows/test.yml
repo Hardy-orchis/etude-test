@@ -13,7 +13,7 @@ env:
   ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
   ALLURE_ENDPOINT: https://hardy.testops.cloud/
   ALLURE_PROJECT_ID: 1
-  ALLURE_RESULTS: allure-results
+  ALLURE_RESULTS: allure
 
 jobs:
   all-tests:
@@ -44,12 +44,6 @@ jobs:
       - name: Run Angular e2e tests
         run: npm run test:e2e
 
-      - name: Install Allure
-        run: npm install -g allure-commandline@2.20.1
-
-      - name: Generate Allure Report
-        run: allure generate allure-results --clean -o allure-results
-
       - name: Install allurectl manually
         run: |
           wget https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O allurectl
@@ -64,5 +58,5 @@ jobs:
           ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
           ALLURE_ENDPOINT: ${{ env.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ env.ALLURE_PROJECT_ID }}
-        run: allurectl upload allure-results
+        run: allurectl upload allure
 
