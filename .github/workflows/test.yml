@@ -41,6 +41,7 @@ jobs:
         run: npm run test:e2e
 
       - name: Generate Allure Report
+        run: npm install -g allure-commandline@2.20.1
         run: npx allure generate ${{ env.ALLURE_RESULTS }} --clean -o allure-report
 
       - name: Install allurectl
