@@ -64,4 +64,5 @@ jobs:
           ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
           ALLURE_ENDPOINT: ${{ env.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ env.ALLURE_PROJECT_ID }}
-        run: allurectl upload --results allure-repos
+        run: allurectl upload allure-repos
+
