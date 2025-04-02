@@ -12,7 +12,8 @@ const login = async (t : TestController, username : string, password : string) =
 fixture('Authentication and dashboard tests')
     .page('http://localhost:4200/login');
 
-test('Connection successful and logout', async t => {
+test.meta({ issue: '123', severity: 'critical' })
+('Connection successful and logout', async t => {
     await login(t, 'admin', 'password123');
 
     await t
@@ -25,7 +26,8 @@ test('Connection successful and logout', async t => {
         .expect(Selector('input[name="username"]').exists).ok();
 });
 
-test('Connection refused with wrong credentials', async t => {
+test.meta({ issue: '123', severity: 'critical' })
+('Connection refused with wrong credentials', async t => {
     await login(t, 'admin', 'wrongPassword');
 
     await t
@@ -34,7 +36,8 @@ test('Connection refused with wrong credentials', async t => {
         .expect(getLocation()).contains('/login');
 });
 
-test('Search with result', async t => {
+test.meta({ issue: '123', severity: 'critical' })
+('Search with result', async t => {
     await login(t, 'admin', 'password123');
     await t.expect(getLocation()).contains('/dashboard');
 
@@ -51,7 +54,8 @@ test('Search with result', async t => {
         .expect(getLocation()).contains('/login');
 });
 
-test('Search without results', async t => {
+test.meta({ issue: '123', severity: 'critical' })
+('Search without results', async t => {
     await login(t, 'admin', 'password123');
     await t.expect(getLocation()).contains('/dashboard');
 
@@ -68,7 +72,8 @@ test('Search without results', async t => {
         .expect(getLocation()).contains('/login');
 });
 
-test('Search with empty input displays all data', async t => {
+test.meta({ issue: '123', severity: 'critical' })
+('Search with empty input displays all data', async t => {
   await login(t, 'admin', 'password123');
   await t.expect(getLocation()).contains('/dashboard');
 

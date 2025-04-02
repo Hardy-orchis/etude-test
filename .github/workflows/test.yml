@@ -13,7 +13,7 @@ env:
   ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
   ALLURE_ENDPOINT: https://hardy.testops.cloud/
   ALLURE_PROJECT_ID: 1
-  ALLURE_RESULTS: allure-repos
+  ALLURE_RESULTS: allure-results
 
 jobs:
   all-tests:
@@ -48,7 +48,7 @@ jobs:
         run: npm install -g allure-commandline@2.20.1
 
       - name: Generate Allure Report
-        run: allure generate allure-repos --clean -o allure-repos
+        run: allure generate allure-results --clean -o allure-results
 
       - name: Install allurectl manually
         run: |
@@ -64,5 +64,5 @@ jobs:
           ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
           ALLURE_ENDPOINT: ${{ env.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ env.ALLURE_PROJECT_ID }}
-        run: allurectl upload allure-repos
+        run: allurectl upload allure-results
 
