@@ -44,7 +44,7 @@ jobs:
         run: npm install -g allure-commandline@2.20.1
 
       - name: Generate Allure Report
-        run: npx allure generate ${{ env.ALLURE_RESULTS }} --clean -o allure-report
+        run: allure generate ${{ env.ALLURE_RESULTS }} --clean -o allure-report
 
       - name: Install allurectl
         uses: allure-framework/setup-allurectl@v1
