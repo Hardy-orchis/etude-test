@@ -3,9 +3,8 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  test:
+  job1:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -16,6 +15,10 @@ jobs:
       - name: Run project
         run: npm start
 
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
       - name: Run tests
         run: npm run test:e2e
 
