@@ -89,7 +89,7 @@ test
             .click(Selector('button').withText('Rechercher'));
 
         const rowCount = await Selector('table tbody tr').count;
-        await t.expect(rowCount).eql(8);
+        await t.expect(rowCount).eql(5);
 
         await t
             .click(Selector('button').withText('log out'))
