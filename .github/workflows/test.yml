@@ -41,12 +41,6 @@ jobs:
       - name: Wait for Angular to be ready
         run: npx wait-on http://localhost:4200
 
-      - name: remove allure dir if exist
-        run: |
-          if [ -d "${{ env.ALLURE_RESULTS }}" ]; then
-            rm -rf "${{ env.ALLURE_RESULTS }}"
-          fi
-
       - name: Run Angular e2e tests
         run: npm run test:e2e
         continue-on-error: true
@@ -66,3 +60,6 @@ jobs:
           ALLURE_ENDPOINT: ${{ env.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ env.ALLURE_PROJECT_ID }}
         run: allurectl upload allure
+
+      - name: remove allure dir
+        run: rm -rf "${{ env.ALLURE_RESULTS }}"
