@@ -13,7 +13,7 @@ env:
   ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
   ALLURE_ENDPOINT: https://hardy.testops.cloud/
   ALLURE_PROJECT_ID: 1
-  ALLURE_RESULTS: allure
+  ALLURE_RESULTS: allure-results
 
 jobs:
   all-tests:
@@ -58,5 +58,4 @@ jobs:
           ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
           ALLURE_ENDPOINT: ${{ env.ALLURE_ENDPOINT }}
           ALLURE_PROJECT_ID: ${{ env.ALLURE_PROJECT_ID }}
-        run: allurectl upload allure
-
+        run: allurectl upload ${{ env.ALLURE_RESULTS }}
