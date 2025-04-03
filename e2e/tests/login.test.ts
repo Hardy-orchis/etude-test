@@ -12,7 +12,7 @@ const login = async (t : TestController, username : string, password : string) =
 fixture('Authentication and dashboard tests')
     .page('http://localhost:4200/login');
 
-test.meta({ID:'43' ,description: 'Test successful login and logout behavior',issue: '123', severity: 'critical' })
+test.meta({ID:'42' ,description: 'Test successful login and logout behavior',issue: '123', severity: 'critical' })
 ('Connection successful and logout', async t => {
     await login(t, 'admin', 'password123');
 
