@@ -42,7 +42,7 @@ jobs:
         run: npx wait-on http://localhost:4200
 
       - name: remove allure dir if exist
-        run: rm -R ${{ ALLURE_RESULTS }}
+        run: rm -R ${{ env.ALLURE_RESULTS }}
 
       - name: Run Angular e2e tests
         run: npm run test:e2e
